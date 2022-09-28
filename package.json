@@ -1,53 +1,21 @@
 {
   "name": "mern-dungeon",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "",
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^13.5.0",
-    "autoprefixer": "^10.4.12",
-    "axios": "^0.27.2",
-    "bootstrap": "^5.2.1",
-    "dotenv": "^16.0.2",
-    "gh-pages": "^4.0.0",
-    "postcss": "^8.4.16",
-    "pretty": "^2.0.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-helmet": "^6.1.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "tailwind": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.css --watch"
+    "start": "node server/server.js --ignore client",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "tailwindcss": "^3.1.8"
+    "concurrently": "^5.1.0"
   }
 }
