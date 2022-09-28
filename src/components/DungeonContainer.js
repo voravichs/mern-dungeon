@@ -24,6 +24,9 @@ function DungeonContainer() {
     if (currentPage === 'CharCust') {
       return <CharCust />;
     }
+    if (currentPage === 'CharCust') {
+      return <CharCust />;
+    }
     return <SignUp />;
   };
 
