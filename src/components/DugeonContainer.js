@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import Navigation from './Navigation';
 import Header from './Header';
 import Footer from './Footer';
-import LogIn from './pages/Home'
+import LogIn from './pages/LogIn'
 import AboutMe from './pages/AboutMe';
-import Home from './pages/LogIn';
+import Home from './pages/Home';
 import SignUp from './pages/SignUp';
+import CharCust from './pages/CharCust';
 
 function DungeonContainer() {
   const [currentPage, setCurrentPage] = useState('Home');
@@ -19,6 +20,9 @@ function DungeonContainer() {
     }
     if (currentPage === 'Home') {
       return <Home />;
+    }
+    if (currentPage === 'CharCust') {
+      return <CharCust />;
     }
     return <SignUp />;
   };
