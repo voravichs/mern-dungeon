@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Resume() {
+export default function SignUp() {
   return (
     <div>
       <h1 className='text-5xl mb-12 text-yellow-100'>Resume</h1>

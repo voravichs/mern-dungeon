@@ -5,50 +5,50 @@ function Navigation({ currentPage, handlePageChange }) {
     <ul className="text-yellow-100 flex flex-col text-center sm:flex-row justify-between mt-4 xl:mt-0 xl:mr-4 text-4xl">
       <li className="mt-4 lg:mr-8">
         <a
-          href="#about"
-          onClick={() => handlePageChange('About')}
+          href="#aboutme"
+          onClick={() => handlePageChange('AboutMe')}
 
-          className={currentPage === 'About'
+          className={currentPage === 'AboutMe'
             ? 'text-yellow-200 font-black drop-shadow-xl hover:text-yellow-300'
             : 'text-yellow-100 hover:text-yellow-200'}
         >
-          About
+          About Us
         </a>
       </li>
       <li className="mt-4 lg:mr-8">
         <a
-          href="#portfolio"
-          onClick={() => handlePageChange('Portfolio')}
+          href="#Home"
+          onClick={() => handlePageChange('Home')}
 
-          className={currentPage === 'Portfolio'
+          className={currentPage === 'Home'
             ? 'text-yellow-200 font-black drop-shadow-xl hover:text-yellow-300'
             : 'text-yellow-100 hover:text-yellow-200'}
         >
-          Portfolio
+          Home
         </a>
       </li>
       <li className="mt-4 lg:mr-8">
         <a
-          href="#contact"
-          onClick={() => handlePageChange('Contact')}
+          href="#LogIn"
+          onClick={() => handlePageChange('LogIn')}
 
-          className={currentPage === 'Contact'
+          className={currentPage === 'LogIn'
             ? 'text-yellow-200 font-black drop-shadow-xl hover:text-yellow-300'
             : 'text-yellow-100 hover:text-yellow-200'}
         >
-          Contact
+          Log In
         </a>
       </li>
       <li className="mt-4 lg:mr-8">
         <a
-          href="#resume"
-          onClick={() => handlePageChange('Resume')}
+          href="#SignUp"
+          onClick={() => handlePageChange('SignUp')}
 
-          className={currentPage === 'Resume'
+          className={currentPage === 'SignUp'
           ? 'text-yellow-200 font-black drop-shadow-xl hover:text-yellow-300'
           : 'text-yellow-100 hover:text-yellow-200'}
         >
-          Resume
+          Sign Up
         </a>
       </li>
     </ul>

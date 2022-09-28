@@ -1,7 +1,7 @@
 import React from 'react';
 import PortfolioPic from '../../images/portfoliopic.jpg';
 
-export default function About() {
+export default function AboutMe() {
   return (
     <div>
       <h1 className='text-5xl mb-12 text-yellow-100 text-center'>About Me</h1>
