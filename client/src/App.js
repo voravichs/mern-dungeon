@@ -1,4 +1,4 @@
-import DugeonContainer from './components/DungeonContainer';
+import DungeonContainer from './components/DungeonContainer';
 import { Helmet } from 'react-helmet';
 
 
@@ -8,9 +8,7 @@ export default function App() {
       <Helmet>
         <script src="https://cdn.tailwindcss.com"></script>
       </Helmet>
-
-      <DugeonContainer />
-
+      <DungeonContainer />
     </div>
   )
 }
