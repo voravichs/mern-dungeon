@@ -17,7 +17,7 @@ function Navigation({ currentPage, handlePageChange }) {
       </li>
       <li className="mt-4 lg:mr-8">
         <a
-          href="#Home"
+          href="#home"
           onClick={() => handlePageChange('Home')}
 
           className={currentPage === 'Home'
@@ -29,7 +29,7 @@ function Navigation({ currentPage, handlePageChange }) {
       </li>
       <li className="mt-4 lg:mr-8">
         <a
-          href="#LogIn"
+          href="#login"
           onClick={() => handlePageChange('LogIn')}
 
           className={currentPage === 'LogIn'
@@ -41,7 +41,7 @@ function Navigation({ currentPage, handlePageChange }) {
       </li>
       <li className="mt-4 lg:mr-8">
         <a
-          href="#SignUp"
+          href="#signup"
           onClick={() => handlePageChange('SignUp')}
 
           className={currentPage === 'SignUp'
