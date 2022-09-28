@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { validateEmail } from '../../utils/helpers';
 
-export default function Contact() {
+export default function LogIn() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
