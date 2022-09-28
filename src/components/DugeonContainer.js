@@ -7,8 +7,8 @@ import AboutMe from './pages/AboutMe';
 import Home from './pages/LogIn';
 import SignUp from './pages/SignUp';
 
-function PortfolioContainer() {
-  const [currentPage, setCurrentPage] = useState('About');
+function DungeonContainer() {
+  const [currentPage, setCurrentPage] = useState('Home');
 
   const renderPage = () => {
     if (currentPage === 'About Me') {
@@ -39,4 +39,4 @@ function PortfolioContainer() {
   );
 }
 
-export default PortfolioContainer;
+export default DungeonContainer;
