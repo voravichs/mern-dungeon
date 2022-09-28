@@ -1,4 +1,4 @@
-import DungeonContainer from './components/DugeonContainer';
+import DungeonContainer from './components/DungeonContainer';
 import { Helmet } from 'react-helmet';
 
 
