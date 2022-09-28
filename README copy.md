@@ -1,8 +1,8 @@
-# professional-portfolio [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
+# professional-portfolio [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Description
 
-This project is the start of a professional portfolio deployed on GitHub. It is a demonstration of how a React front-end app will function. 
+This project is the start of a professional portfolio deployed on GitHub. It is a demonstration of how a React front-end app will function.
 
 ## Usage Instructions
 
@@ -34,16 +34,16 @@ At the footer, there are persistent links to my github profile, linkedin profile
 
 ![resume page](./src/images/screen4.PNG)
 
-## License 
+## License
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 "Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights."
 
-Read more about this license at: https://choosealicense.com/licenses/gpl-3.0/
+Read more about this license at: "https://choosealicense.com/licenses/gpl-3.0/"
 
 ## Github Repository Link
 
-GitHub Repository: https://github.com/voravichs/voravich-react-portfolio
- 
-Deployed App: https://voravichs.github.io/voravich-react-portfolio/
+GitHub Repository: "https://github.com/voravichs/voravich-react-portfolio"
+
+Deployed App: "https://voravichs.github.io/voravich-react-portfolio/"

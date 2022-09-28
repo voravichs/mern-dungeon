@@ -1,110 +1,90 @@
-import React, { useState, useEffect } from 'react';
-import { validateEmail } from '../../utils/helpers';
+import React, { useState } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
+import { loginUser } from '../utils/API';
+import Auth from '../utils/auth';
 
-export default function LogIn() {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [message, setMessage] = useState('');
-  const [validEmail, setValidEmail] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+const LoginForm = () => {
+  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+  const [validated] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
-  useEffect(() => {
-    if (!validateEmail(email)) {
-      setValidEmail('Email is invalid');
-    } else {
-      setValidEmail('');
-    }
-  }, [email]);
-
-  useEffect(() => {
-    if (!message) {
-      setErrorMessage('Message is required');
-    } else {
-      setErrorMessage('');
-    }
-  }, [message])
-
-  const handleInputChange = (e) => {
-    const { target } = e;
-    const inputType = target.name;
-    const inputValue = target.value;
-
-    if (inputType === 'email') {
-      setEmail(inputValue);
-    } else if (inputType === 'name') {
-      setName(inputValue);
-    } else {
-      setMessage(inputValue);
-    }
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
   };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
 
-    if (!message) {
-      setErrorMessage('Message is required');
-      return;
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
     }
 
-    setName('');
-    setMessage('');
-    setEmail('');
+    try {
+      const response = await loginUser(userFormData);
+
+      if (!response.ok) {
+        throw new Error('something went wrong!');
+      }
+
+      const { token, user } = await response.json();
+      console.log(user);
+      Auth.login(token);
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    setUserFormData({
+      username: '',
+      email: '',
+      password: '',
+    });
   };
 
   return (
-    <div>
-      <h1 className='text-5xl mb-12 text-yellow-100 text-center'>Contact</h1>
-      <form className="flex flex-col bg-yellow-50 p-8">
-        <div className='mb-8'>
-          <p className='text-emerald-800 text-3xl mb-4'> Name </p>
-          <input
-            className='w-1/2 p-2 ring'
-            value={name}
-            name="name"
+    <>
+      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+          Something went wrong with your login credentials!
+        </Alert>
+        <Form.Group>
+          <Form.Label htmlFor='email'>Email</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Your email'
+            name='email'
             onChange={handleInputChange}
-            type="text"
-            placeholder="Name"
+            value={userFormData.email}
+            required
           />
+          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+        </Form.Group>
 
-        </div>
-        <div className='mb-8'>
-          <p className='text-emerald-800 text-3xl mb-4'> Email </p>
-          <input
-            className='w-1/2 p-2 ring-2 mb-2'
-            value={email}
-            name="email"
+        <Form.Group>
+          <Form.Label htmlFor='password'>Password</Form.Label>
+          <Form.Control
+            type='password'
+            placeholder='Your password'
+            name='password'
             onChange={handleInputChange}
-            type="email"
-            placeholder="Email"
+            value={userFormData.password}
+            required
           />
-          {validEmail && email && (
-            <div className='text-red-400 text-lg'>
-              <p className="error-text">{validEmail}</p>
-            </div>
-          )}
-        </div>
-
-        <div className='mb-8'>
-          <p className='text-emerald-800 text-3xl mb-4'> Message </p>
-          <textarea
-            className='w-full p-2 ring'
-            rows={5}
-            cols={50}
-            value={message}
-            name="message"
-            onChange={handleInputChange}
-            type="message"
-            placeholder="Message"
-          />
-          {errorMessage && (
-            <div className='text-red-400 text-lg'>
-              <p className="error-text">{errorMessage}</p>
-            </div>
-          )}
-        </div>
-
-        <button className='block w-1/2 text-yellow-100 text-2xl bg-emerald-600 hover:bg-emerald-700 transition-all ring-2 rounded-lg ring-emerald-500 p-4 mx-auto' type="button" onClick={handleFormSubmit}>Submit</button>
-      </form>
-    </div>
+          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+        </Form.Group>
+        <Button
+          disabled={!(userFormData.email && userFormData.password)}
+          type='submit'
+          variant='success'>
+          Submit
+        </Button>
+      </Form>
+    </>
   );
-}
+};
+
+export default LoginForm;
