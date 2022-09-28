@@ -13,7 +13,7 @@ function DungeonContainer() {
   const [currentPage, setCurrentPage] = useState('Home');
 
   const renderPage = () => {
-    if (currentPage === 'About Me') {
+    if (currentPage === 'AboutMe') {
       return <AboutMe />;
     }
     if (currentPage === 'LogIn') {
@@ -21,9 +21,6 @@ function DungeonContainer() {
     }
     if (currentPage === 'Home') {
       return <Home handlePageChange={handlePageChange}/>;
-    }
-    if (currentPage === 'CharCust') {
-      return <CharCust />;
     }
     if (currentPage === 'CharCust') {
       return <CharCust />;
