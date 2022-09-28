@@ -1,41 +1,110 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
 
-export default function SignUp() {
+import { createUser } from '../../utils/API';
+import Auth from '../../utils/auth';
+
+const SignUp = () => {
+  // set initial form state
+  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
+  // set state for form validation
+  const [validated] = useState(false);
+  // set state for alert
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    try {
+      const response = await createUser(userFormData);
+
+      if (!response.ok) {
+        throw new Error('something went wrong!');
+      }
+
+      const { token, user } = await response.json();
+      console.log(user);
+      Auth.login(token);
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    setUserFormData({
+      username: '',
+      email: '',
+      password: '',
+    });
+  };
+
   return (
-    <div>
-      <h1 className='text-5xl mb-12 text-yellow-100'>Resume</h1>
-      <p className='text-2xl text-yellow-100 mb-8 text-center'> Download my <a className='text-yellow-200' href='https://drive.google.com/file/d/1N3fD5wsOlrfw3qrbtqU9FLR4Job2Uupy/view?usp=sharing'>Resume!</a></p>
-      <div className='grid grid rows-2 grid-cols-2 gap-8 xl:mx-96'>
-        <ul className='text-2xl text-yellow-100 text-center'>
-          <p className='font-bold underline'>Front-end Proficiencies</p>
-          <li>HTML</li>
-          <li>CSS</li>
-          <li>JavaScript</li>
-          <li>jQuery</li>
-          <li>Responsive Design</li>
-          <li>React</li>
-          <li>Tailwind CSS</li>
-        </ul>
+    <>
+      {/* This is needed for the validation functionality above */}
+      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+        {/* show alert if server response is bad */}
+        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+          Something went wrong with your signup!
+        </Alert>
 
-        <ul className='text-2xl text-yellow-100 text-center'>
-          <p className='font-bold underline'>Other Hobbies/Skills</p>
-          <li>Blender 3D Modeling</li>
-          <li>Creative Writing</li>
-          <li>Tabletop Role-playing Games</li>
-          <li>Photoshop</li>
-        </ul>
+        <Form.Group>
+          <Form.Label htmlFor='username'>Username</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Your username'
+            name='username'
+            onChange={handleInputChange}
+            value={userFormData.username}
+            required
+          />
+          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
+        </Form.Group>
 
-        <ul className='text-2xl text-yellow-100 text-center'>
-          <p className='font-bold underline'>Back-end Proficiencies</p>
-          <li>APIs</li>
-          <li>Node.js</li>
-          <li>Express.js</li>
-          <li>mySQL, Sequelize</li>
-          <li>MongoDB, Mongoose</li>
-          <li>REST</li>
-          <li>GraphQl</li>
-        </ul>
-      </div>
-    </div>
+        <Form.Group>
+          <Form.Label htmlFor='email'>Email</Form.Label>
+          <Form.Control
+            type='email'
+            placeholder='Your email address'
+            name='email'
+            onChange={handleInputChange}
+            value={userFormData.email}
+            required
+          />
+          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label htmlFor='password'>Password</Form.Label>
+          <Form.Control
+            type='password'
+            placeholder='Your password'
+            name='password'
+            onChange={handleInputChange}
+            value={userFormData.password}
+            required
+          />
+          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+        </Form.Group>
+        <Button
+          disabled={!(userFormData.username && userFormData.email && userFormData.password)}
+          type='submit'
+          variant='success'>
+          Submit
+        </Button>
+      </Form>
+    </>
   );
-}
+};
+
+export default SignUp;
