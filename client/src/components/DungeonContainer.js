@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import Navigation from './Navigation';
 import Header from './Header';
 import Footer from './Footer';
-import LogIn from './pages/Home'
+import Home from './pages/Home'
 import AboutMe from './pages/AboutMe';
-import Home from './pages/LogIn';
+import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
+import CharCust from './pages/CharCust';
 
 
 function DungeonContainer() {
@@ -15,11 +16,17 @@ function DungeonContainer() {
     if (currentPage === 'About Me') {
       return <AboutMe />;
     }
-    if (currentPage === 'Log In') {
+    if (currentPage === 'LogIn') {
       return <LogIn />;
     }
     if (currentPage === 'Home') {
-      return <Home />;
+      return <Home handlePageChange={handlePageChange}/>;
+    }
+    if (currentPage === 'CharCust') {
+      return <CharCust />;
+    }
+    if (currentPage === 'CharCust') {
+      return <CharCust />;
     }
     return <SignUp />;
   };
