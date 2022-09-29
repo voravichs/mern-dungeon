@@ -7,10 +7,12 @@ import AboutMe from './pages/AboutMe';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
 import CharCust from './pages/CharCust';
-
+import Battle from './pages/Battle';
 
 function DungeonContainer() {
   const [currentPage, setCurrentPage] = useState('Home');
+  const [newCharacter, setNewCharacter] = useState();
+  const [newEnemy, setNewEnemy] = useState();
 
   const renderPage = () => {
     if (currentPage === 'AboutMe') {
@@ -23,12 +25,23 @@ function DungeonContainer() {
       return <Home handlePageChange={handlePageChange}/>;
     }
     if (currentPage === 'CharCust') {
-      return <CharCust />;
+      return <CharCust handlePageChange={handlePageChange}/>;
+    }
+    if (currentPage === 'Battle') {
+      return <Battle character={newCharacter} enemy={newEnemy}/>;
     }
     return <SignUp />;
   };
 
-  const handlePageChange = (page) => setCurrentPage(page);
+  const handlePageChange = (page, character, enemy) => {
+    setCurrentPage(page);
+    if (character) {
+      setNewCharacter(character);
+    } 
+    if (enemy) {
+      setNewEnemy(enemy);
+    }
+  }
 
   return (
     <div className='mx-auto bg-gray-800 h-screen '>
