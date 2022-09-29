@@ -45,21 +45,23 @@ const CharCust = () => {
   
   return (
     <div>
-      <h1 className='text-5xl mb-12 text-yellow-100 text-center'>Character Customization</h1>         
+      <h1 className='text-5xl mb-12 text-blue-400 text-center'>Character Customization</h1>         
 
         <Sprite sprite={chosenSprite}/>
-        <button className='block w-1/8 text-yellow-100 text-2xl bg-emerald-600 hover:bg-emerald-700 transition-all ring-2 rounded-lg ring-emerald-500 p-4 mx-auto' 
-          type="button" 
-          onClick={handleNext}>
-            Next
-        </button>
-        <button className='block w-1/8 text-yellow-100 text-2xl bg-emerald-600 hover:bg-emerald-700 transition-all ring-2 rounded-lg ring-emerald-500 p-4 mx-auto' 
-          type="button" 
-          onClick={handlePrev}>
-            Prev
-        </button>
-      <input className= 'text-center' placeholder="enter name"></input>
-      <button className='block w-1/2 text-yellow-100 text-2xl bg-emerald-600 hover:bg-emerald-700 transition-all ring-2 rounded-lg ring-emerald-500 p-4 mx-auto' 
+        <div className='flex'>
+          <button className='w-1/8 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto' 
+            type="button" 
+            onClick={handleNext}>
+              Next
+          </button>
+          <button className=' w-1/8 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto' 
+            type="button" 
+            onClick={handlePrev}>
+              Prev
+          </button>
+        </div>
+      <input className= 'p-2 m-7 text-center' placeholder="enter name"></input>
+      <button className='block w-1/2 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto' 
         type="button" 
         onClick={handleStartGame}>
           Start Game
