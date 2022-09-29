@@ -267,7 +267,7 @@ const warriors = [
 
 let charSprites = warriors;
 
-const CharCust = ({handlePageChange}) => {
+const CharCust = ({handleBattle}) => {
   const [currentSprite, setCurrentSprite] = useState(0);
   const [chosenSprite, setChosenSprite] = useState(charSprites[0]);
 
@@ -275,7 +275,7 @@ const CharCust = ({handlePageChange}) => {
     e.preventDefault();
     const newCharacter = new Player(20, 10, 3, 3, 2, chosenSprite.link, "player character");
     const newEnemy = new Player(20, 8, 4, 4, 2, special[8].link, "clown");
-    handlePageChange('Battle', newCharacter, newEnemy);
+    handleBattle(newCharacter, newEnemy);
   }
 
   const handleNext = (e) => {
