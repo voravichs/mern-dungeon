@@ -9,8 +9,8 @@ function Navigation({ currentPage, handlePageChange }) {
           onClick={() => handlePageChange('AboutMe')}
 
           className={currentPage === 'AboutMe'
-            ? 'text-teal-300 font-black drop-shadow-xl hover:text-blue-200'
-            : 'text-teal-300 hover:text-blue-200'}
+            ? 'text-blue-400 font-black drop-shadow-xl hover:text-blue-200'
+            : 'text-blue-400 hover:text-blue-100'}
         >
           About Us
         </a>
@@ -21,8 +21,8 @@ function Navigation({ currentPage, handlePageChange }) {
           onClick={() => handlePageChange('Home')}
 
           className={currentPage === 'Home'
-            ? 'text-teal-300 font-black drop-shadow-xl hover:text-blue-200'
-            : 'text-teal-300 hover:text-blue-200'}
+          ? 'text-blue-400 font-black drop-shadow-xl hover:text-blue-200'
+          : 'text-blue-400 hover:text-blue-100'}
         >
           Home
         </a>
@@ -33,8 +33,8 @@ function Navigation({ currentPage, handlePageChange }) {
           onClick={() => handlePageChange('LogIn')}
 
           className={currentPage === 'LogIn'
-            ? 'text-teal-300 font-black drop-shadow-xl hover:text-blue-200'
-            : 'text-teal-300 hover:text-blue-200'}
+          ? 'text-blue-400 font-black drop-shadow-xl hover:text-blue-200'
+          : 'text-blue-400 hover:text-blue-100'}
         >
           Log In
         </a>
@@ -45,8 +45,8 @@ function Navigation({ currentPage, handlePageChange }) {
           onClick={() => handlePageChange('SignUp')}
 
           className={currentPage === 'SignUp'
-          ? 'text-teal-300 font-black drop-shadow-xl hover:text-blue-200'
-          : 'text-teal-300 hover:text-blue-200'}
+          ? 'text-blue-400 font-black drop-shadow-xl hover:text-blue-200'
+            : 'text-blue-400 hover:text-blue-100'}
         >
           Sign Up
         </a>
