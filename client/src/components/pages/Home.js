@@ -14,7 +14,7 @@ export default function Home({handlePageChange}) {
         type="button" 
         onClick={handleNewGame}>
           New Game
-        </button>
+      </button>
     </div>
   );
 }
