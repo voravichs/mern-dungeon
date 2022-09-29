@@ -3,11 +3,20 @@ import React, { useState } from 'react';
 export default function Battle(props) {
     const [characterHP, setCharacterHP ] = useState(props.character.currentHealth);
     const [enemyHP, setEnemyHP ] = useState(props.enemy.currentHealth);
+    const [charDesc, setCharDesc] = useState("Lorem Ipsum");
+    const [enemyDesc, setEnemyDesc] = useState("Lorem Ipsum");
 
     const handleStartBattle = (e) => {
-        if (props.character.currentHealth > 0 || props.enemy.currentHealth > 0) {
-            setEnemyHP(enemyHP - props.character.physicalAttack(props.enemy));
-            setCharacterHP(characterHP - props.enemy.physicalAttack(props.character));
+        e.preventDefault();
+        if (!props.character.isDead() || !props.enemy.isDead()) {
+            console.log("-- PLAYER TURN --");
+            const playerAttack = props.character.physicalAttack(props.enemy)
+            setEnemyHP(enemyHP - playerAttack);
+            setCharDesc("You deal "+ playerAttack + " damage");
+            console.log("-- ENEMY TURN --");
+            const enemyAttack = props.enemy.physicalAttack(props.character);
+            setCharacterHP(characterHP - enemyAttack);
+            setEnemyDesc("Enemy deals "+ enemyAttack + " damage");
         }
     }
     
@@ -18,10 +27,12 @@ export default function Battle(props) {
                 <div>
                     <img className="w-2/3 mx-auto" src={props.character.portrait} alt={props.character.altText}></img>
                     <p className='text-3xl mb-4 text-yellow-100 text-center'>You have {characterHP} HP.</p>
+                    <p className='text-3xl mb-4 text-yellow-100 text-center'> {charDesc} </p>
                 </div>
                 <div>
-                <img className="w-2/3 mx-auto" src={props.enemy.portrait} alt={props.enemy.altText}></img>
+                    <img className="w-2/3 mx-auto" src={props.enemy.portrait} alt={props.enemy.altText}></img>
                     <p className='text-3xl mb-4 text-yellow-100 text-center'>The enemy has {enemyHP} HP.</p>
+                    <p className='text-3xl mb-4 text-yellow-100 text-center'> {enemyDesc} </p>
                 </div>
             </div>
             <button className='block w-1/2 text-yellow-100 text-2xl bg-emerald-600 hover:bg-emerald-700 transition-all ring-2 rounded-lg ring-emerald-500 p-4 mx-auto'

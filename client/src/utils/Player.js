@@ -1,4 +1,4 @@
-class Player {
+export default class Player {
     //constructor
     constructor(maxHealth, attack, magic, defense, mDefense, portrait, altText) {
         this.maxHealth = maxHealth;
@@ -14,26 +14,28 @@ class Player {
     //attack functions
     physicalAttack(target) {
         let rng = Math.floor(Math.random() * 11); 
+        console.log("rng: "+ rng);
+        console.log("attack "+ (this.attack - target.defense));
         if (rng < 2) return 0;
-        else if (2 < rng && rng < 10) {
+        else if (2 <= rng && rng < 10) {
             target.currentHealth = target.currentHealth - (this.attack - target.defense);
             return  (this.attack - target.defense);
         }
-        if (rng == 10) {
+        if (rng === 10) {
             target.currentHealth = target.currentHealth - (1.5 * this.attack - target.defense);
-            return  (this.attack - target.defense);
+            return  (1.5 * (this.attack - target.defense));
         }
     }
     magicAttack(target) {
         let rng = Math.floor(Math.random() * 11) 
         if (rng < 2) return 0;
-        else if (2 < rng && rng < 10) {
+        else if (2 <= rng && rng < 10) {
             target.currentHealth = target.currentHealth - (this.magic - target.mDefense);
             return  (this.magic - target.mDefense);
         }
-        if (rng == 10) {
+        if (rng === 10) {
             target.currentHealth = target.currentHealth - (1.5 * this.magic - target.mDefense);
-            return  (1.5 * this.magic - target.mDefense);
+            return  (1.5* (this.magic - target.mDefense));
         }
     }
     //heal function
@@ -44,7 +46,7 @@ class Player {
     //checks if a character is dead
     isDead() {
         if (this.currentHealth > 0) return false;
-        else if (this.currentHealth <= 0) return true;
+        else if (this.currentHealth <= this.maxHealth) return true;
     }
     //level up function
     levelup() {

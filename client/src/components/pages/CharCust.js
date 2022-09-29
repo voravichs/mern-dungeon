@@ -7,10 +7,6 @@ const special = [
     name: "orc"
   },
   {
-    link: "https://i.imgur.com/DcCfdrm.png",
-    name: "clown"
-  },
-  {
     link: "https://i.imgur.com/O3mZbud.png",
     name: "legend of zelda link"
   },
@@ -33,6 +29,10 @@ const special = [
   {
     link: "https://i.imgur.com/yvaVbNn.png",
     name: "santa"
+  },
+  {
+    link: "https://i.imgur.com/BUuDLsF.png",
+    name: "minecraft steve"
   },
   {
     link: "https://i.imgur.com/DcCfdrm.png",
