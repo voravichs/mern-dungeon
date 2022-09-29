@@ -331,26 +331,26 @@ const CharCust = ({handlePageChange}) => {
 
   return (
     <div>
-      <h1 className='text-5xl mb-12 text-yellow-100 text-center'>Character Customization</h1>
+      <h1 className='text-5xl mb-12 p-6 text-teal-400 text-center'>Character Customization</h1>
       <div className='grid grid-cols-2'>
         <div>
-          <p className='text-4xl text-yellow-100 text-center'> Select A Portrait</p>
+          <p className='text-4xl text-teal-200 text-center'> Select A Portrait</p>
           <img className="w-2/3 mx-auto" src={chosenSprite.link} alt={chosenSprite.name}></img>
           <div className='flex mb-8'>
-            <button className='block w-1/8 text-yellow-100 text-2xl bg-emerald-600 hover:bg-emerald-700 transition-all ring-2 rounded-lg ring-emerald-500 p-4 mx-auto'
+            <button className='block w-1/4 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto'
               type="button"
               onClick={handlePrev}>
               Prev
             </button>
-            <button className='block w-1/8 text-yellow-100 text-2xl bg-emerald-600 hover:bg-emerald-700 transition-all ring-2 rounded-lg ring-emerald-500 p-4 mx-auto'
+            <button className='block w-1/4 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto'
               type="button"
               onClick={handleNext}>
               Next
             </button>
           </div>
-          <p className='text-3xl mb-4 text-yellow-100 text-center'>Portrait Style</p>
+          <p className='text-3xl mb-4 text-teal-200 text-center'>Portrait Style</p>
           <div className="w-1/2 lg:max-w-sm mx-auto">
-            <select className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
+            <select className="w-full p-2.5 text-teal-200 bg-gray-700 border rounded-md shadow-sm ring-teal-500 appearance-none focus:border-teal-600"
               onChange={handleSelect}>
               <option value="warrior">Warrior</option>
               <option value="rogue">Rogue</option>
@@ -360,9 +360,9 @@ const CharCust = ({handlePageChange}) => {
           </div>
         </div>
         <div className='my-auto'>
-          <p className='text-4xl mb-8 text-yellow-100 text-center'> Name your Character</p>
+          <p className='text-4xl mb-8 text-teal-200 text-center'> Name your Character</p>
           <input className='text-center p-4 text-xl mb-8 w-full' placeholder="Enter Name"></input>
-          <button className='block w-1/2 text-yellow-100 text-2xl bg-emerald-600 hover:bg-emerald-700 transition-all ring-2 rounded-lg ring-emerald-500 p-4 mx-auto'
+          <button className='block w-1/2 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto'
             type="button"
             onClick={handleStartGame}>
             Start Game
