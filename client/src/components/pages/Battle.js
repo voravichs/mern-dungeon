@@ -35,7 +35,7 @@ export default function Battle({character, enemy}) {
                     <p className='text-3xl mb-4 text-teal-200 text-center'> {enemyDesc} </p>
                 </div>
             </div>
-            <button className='block w-1/2 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto my-4'
+            <button className='block w-1/2 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto my-4 mb-9'
                 type="button"
                 onClick={handleStartBattle}>
                     Battle!

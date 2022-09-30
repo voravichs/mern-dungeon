@@ -335,7 +335,7 @@ const CharCust = ({handleBattle}) => {
 
   return (
     <div className='bg-blue-800 border-8 p-8'>
-      <h1 className='text-4xl md:text-5xl mb-12 text-teal-400 text-center'>Character Creation</h1>
+      <h1 className='text-4xl md:text-5xl mb-12 text-teal-400 text-center py-3'>Character Creation</h1>
       <div className='md:grid grid-cols-2'>
         <div>
           <p className='text-4xl text-teal-200 text-center'> Select A Portrait</p>
@@ -365,8 +365,8 @@ const CharCust = ({handleBattle}) => {
         </div>
         <div className='my-auto'>
           <p className='text-4xl mb-8 text-teal-200 text-center'> Name your Character</p>
-          <input className='text-center p-4 text-xl mb-8 w-full' placeholder="Enter Name"></input>
-          <Link className='block w-1/2 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto'
+          <input className='text-center p-4 text-xl mb-8 w-full bg-gray-700 text-teal-200 placeholder:text-teal-200 border border-teal-200' placeholder="Enter Name"></input>
+          <Link className='block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'
             to="/battle"
             onClick={handleStartGame}>
             Start Game
