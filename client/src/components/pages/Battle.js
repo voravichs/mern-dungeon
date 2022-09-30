@@ -21,8 +21,8 @@ export default function Battle({character, enemy}) {
     }
     
     return (
-        <div>
-            <h1 className='text-5xl mb-12 p-6 text-teal-400 text-center'>Mern Dungeon</h1>
+        <div className='bg-blue-800 border-8 p-auto'>
+            <h1 className='text-5xl mb-12 p-6 text-teal-400 text-center p-auto'>Mern Dungeon</h1>
             <div className='grid grid-cols-2 mb-8'>
                 <div>
                     <img className="w-2/3 mx-auto" src={character.portrait} alt={character.altText}></img>
@@ -35,7 +35,7 @@ export default function Battle({character, enemy}) {
                     <p className='text-3xl mb-4 text-teal-200 text-center'> {enemyDesc} </p>
                 </div>
             </div>
-            <button className='block w-1/2 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto'
+            <button className='block w-1/2 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto my-4 mb-9'
                 type="button"
                 onClick={handleStartBattle}>
                     Battle!
