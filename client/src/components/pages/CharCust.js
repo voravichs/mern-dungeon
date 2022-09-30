@@ -39,6 +39,10 @@ const special = [
     link: "https://i.imgur.com/DcCfdrm.png",
     name: "clown"
   },
+  {
+    link: "https://i.imgur.com/cIOapB8.png",
+    name: "Ben"
+  }
 ]
 
 const mages = [
@@ -274,7 +278,7 @@ const CharCust = ({handleBattle}) => {
 
   const handleStartGame = (e) => {
     const newCharacter = new Player(20, 10, 3, 3, 2, chosenSprite.link, "player character");
-    const newEnemy = new Player(20, 8, 4, 4, 2, special[8].link, "clown");
+    const newEnemy = new Player(20, 8, 4, 4, 2, special[9].link, "clown");
     handleBattle(newCharacter, newEnemy);
   }
 
