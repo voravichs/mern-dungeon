@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ApolloClient,
   InMemoryCache,
@@ -6,10 +6,18 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Helmet } from 'react-helmet';
 
-import DungeonContainer from './components/DungeonContainer';
+import Navigation from './components/Navigation';
+import Header from './components/Header';
+import Home from './components/pages/Home'
+import AboutUs from './components/pages/AboutUs';
+import LogIn from './components/pages/LogIn';
+import SignUp from './components/pages/SignUp';
+import CharCust from './components/pages/CharCust';
+import Battle from './components/pages/Battle';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -36,14 +44,66 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+  const [currentPage, setCurrentPage] = useState('Home');
+  const [newCharacter, setNewCharacter] = useState();
+  const [newEnemy, setNewEnemy] = useState();
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  }
+
+  const handleBattle = (character, enemy) => {
+    if (character && enemy) {
+      setNewCharacter(character);
+      setNewEnemy(enemy);
+    } 
+    
+  }
+
   return (
     <ApolloProvider client={client}>
-      <div>
-        <Helmet>
-          <script src="https://cdn.tailwindcss.com"></script>
-        </Helmet>
-        <DungeonContainer />
-      </div>
+      <Router>
+        <div>
+          <Helmet>
+            <script src="https://cdn.tailwindcss.com"></script>
+          </Helmet>
+          <div className='mx-auto bg-gray-800 h-screen '>
+            <div className='flex flex-col lg:flex-row justify-between p-12 bg-gray-900 drop-shadow-xl'>
+              <Header />
+              <Navigation currentPage={currentPage} handlePageChange={handlePageChange}/>
+            </div>
+            <div className='m-16'>
+              <Routes>
+                <Route
+                  path="/"
+                  element={<Home />}
+                />
+                <Route
+                  path="/login"
+                  element={<LogIn />}
+                />
+                <Route
+                  path="/signup"
+                  element={<SignUp />}
+                />
+                <Route
+                  path="/aboutus"
+                  element={<AboutUs />}
+                />
+                <Route
+                  path="/createcharacter"
+                  element={<CharCust handleBattle={handleBattle}/>}
+                />
+                <Route
+                  path="/battle"
+                  element={<Battle character={newCharacter} enemy={newEnemy}/>}
+                />
+              </Routes>
+            </div>
+          </div>
+        </div>
+      </Router>
+
     </ApolloProvider>
   )
 }
