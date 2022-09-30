@@ -8,7 +8,6 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-
 import { Helmet } from 'react-helmet';
 
 import Navigation from './components/Navigation';
@@ -54,28 +53,54 @@ export default function App() {
   }
 
   const handleBattle = (character, enemy) => {
-    if (character && enemy) {
-      setNewCharacter(character);
-      setNewEnemy(enemy);
-    } 
-    
+    setNewCharacter(character);
+    setNewEnemy(enemy);
   }
 
   return (
     <ApolloProvider client={client}>
-      <div>
-        <Helmet>
-          <script src="https://cdn.tailwindcss.com"></script>
-        </Helmet>
-        <DungeonContainer />
-      </div>
       <Router>
         <div>
-          <Link to="/aboutme">
-            <button>Click</button>
-          </Link>
+          <Helmet>
+            <script src="https://cdn.tailwindcss.com"></script>
+          </Helmet>
+          <div className='bg-gray-800 h-max pb-1'>
+            <div className='flex flex-col lg:flex-row justify-between p-12 bg-gray-900 drop-shadow-xl'>
+              <Header />
+              <Navigation currentPage={currentPage} handlePageChange={handlePageChange} />
+            </div>
+            <div className='m-16'>
+              <Routes>
+                <Route
+                  path="/"
+                  element={<Home />}
+                />
+                <Route
+                  path="/login"
+                  element={<LogIn />}
+                />
+                <Route
+                  path="/signup"
+                  element={<SignUp />}
+                />
+                <Route
+                  path="/aboutus"
+                  element={<AboutUs />}
+                />
+                <Route
+                  path="/createcharacter"
+                  element={<CharCust handleBattle={handleBattle} />}
+                />
+                <Route
+                  path="/battle"
+                  element={<Battle character={newCharacter} enemy={newEnemy} />}
+                />
+              </Routes>
+            </div>
+          </div>
         </div>
       </Router>
+
     </ApolloProvider>
   )
 }
