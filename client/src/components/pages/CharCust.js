@@ -330,7 +330,7 @@ const CharCust = ({handlePageChange}) => {
   }
 
   return (
-    <div>
+    <div className='bg-blue-800 border-8 p-8'>
       <h1 className='text-5xl mb-12 p-6 text-teal-400 text-center'>Character Customization</h1>
       <div className='grid grid-cols-2'>
         <div>
