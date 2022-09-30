@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 
-export default function Battle(props) {
-    const [characterHP, setCharacterHP ] = useState(props.character.currentHealth);
-    const [enemyHP, setEnemyHP ] = useState(props.enemy.currentHealth);
+export default function Battle({character, enemy}) {
+    const [characterHP, setCharacterHP ] = useState(character.currentHealth);
+    const [enemyHP, setEnemyHP ] = useState(enemy.currentHealth);
     const [charDesc, setCharDesc] = useState("Lorem Ipsum");
     const [enemyDesc, setEnemyDesc] = useState("Lorem Ipsum");
 
     const handleStartBattle = (e) => {
         e.preventDefault();
-        if (!props.character.isDead() || !props.enemy.isDead()) {
+        if (!character.isDead() || !enemy.isDead()) {
             console.log("-- PLAYER TURN --");
-            const playerAttack = props.character.physicalAttack(props.enemy)
+            const playerAttack = character.physicalAttack(enemy)
             setEnemyHP(enemyHP - playerAttack);
             setCharDesc("You deal "+ playerAttack + " damage");
             console.log("-- ENEMY TURN --");
-            const enemyAttack = props.enemy.physicalAttack(props.character);
+            const enemyAttack = enemy.physicalAttack(character);
             setCharacterHP(characterHP - enemyAttack);
             setEnemyDesc("Enemy deals "+ enemyAttack + " damage");
         }
@@ -25,12 +25,12 @@ export default function Battle(props) {
             <h1 className='text-5xl mb-12 p-6 text-teal-400 text-center'>Mern Dungeon</h1>
             <div className='grid grid-cols-2 mb-8'>
                 <div>
-                    <img className="w-2/3 mx-auto" src={props.character.portrait} alt={props.character.altText}></img>
+                    <img className="w-2/3 mx-auto" src={character.portrait} alt={character.altText}></img>
                     <p className='text-3xl mb-4 text-teal-200 text-center'>You have {characterHP} HP.</p>
                     <p className='text-3xl mb-4 text-teal-200 text-center'> {charDesc} </p>
                 </div>
                 <div>
-                    <img className="w-2/3 mx-auto" src={props.enemy.portrait} alt={props.enemy.altText}></img>
+                    <img className="w-2/3 mx-auto" src={enemy.portrait} alt={enemy.altText}></img>
                     <p className='text-3xl mb-4 text-teal-200 text-center'>The enemy has {enemyHP} HP.</p>
                     <p className='text-3xl mb-4 text-teal-200 text-center'> {enemyDesc} </p>
                 </div>
