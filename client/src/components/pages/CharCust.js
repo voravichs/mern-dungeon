@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Player from '../../utils/Player';
+import { Link } from 'react-router-dom';
 
 const special = [
   {
@@ -38,6 +39,10 @@ const special = [
     link: "https://i.imgur.com/DcCfdrm.png",
     name: "clown"
   },
+  {
+    link: "https://i.imgur.com/cIOapB8.png",
+    name: "Ben"
+  }
 ]
 
 const mages = [
@@ -272,9 +277,8 @@ const CharCust = ({handleBattle}) => {
   const [chosenSprite, setChosenSprite] = useState(charSprites[0]);
 
   const handleStartGame = (e) => {
-    e.preventDefault();
     const newCharacter = new Player(20, 10, 3, 3, 2, chosenSprite.link, "player character");
-    const newEnemy = new Player(20, 8, 4, 4, 2, special[8].link, "clown");
+    const newEnemy = new Player(20, 8, 4, 4, 2, special[9].link, "clown");
     handleBattle(newCharacter, newEnemy);
   }
 
@@ -330,27 +334,27 @@ const CharCust = ({handleBattle}) => {
   }
 
   return (
-    <div>
-      <h1 className='text-5xl mb-12 p-6 text-teal-400 text-center'>Character Customization</h1>
-      <div className='grid grid-cols-2'>
+    <div className='bg-blue-800 border-8 p-8'>
+      <h1 className='text-4xl md:text-5xl mb-12 text-teal-400 text-center py-3'>Character Creation</h1>
+      <div className='md:grid grid-cols-2'>
         <div>
           <p className='text-4xl text-teal-200 text-center'> Select A Portrait</p>
           <img className="w-2/3 mx-auto" src={chosenSprite.link} alt={chosenSprite.name}></img>
           <div className='flex mb-8'>
-            <button className='block w-1/4 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto'
+            <button className='block md:w-1/4 text-teal-200 text-2xl bg-blue-00 hover:bg-gray-700 transition-all ring-2 rounded-lg ring-teal-500 p-auto py-4 mx-auto'
               type="button"
               onClick={handlePrev}>
               Prev
             </button>
-            <button className='block w-1/4 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto'
+            <button className='block md:w-1/4 text-teal-200 text-2xl bg-blue-00 hover:bg-gray-700 transition-all ring-2 rounded-lg ring-teal-500 p-auto py-4 mx-auto'
               type="button"
               onClick={handleNext}>
               Next
             </button>
           </div>
           <p className='text-3xl mb-4 text-teal-200 text-center'>Portrait Style</p>
-          <div className="w-1/2 lg:max-w-sm mx-auto">
-            <select className="w-full p-2.5 text-teal-200 bg-gray-700 border rounded-md shadow-sm ring-teal-500 appearance-none focus:border-teal-600"
+          <div className="w-1/2 lg:max-w-sm mx-auto pb-3">
+            <select className="w-full p-2.5 text-teal-200 bg-gray-700 border border-teal-200 rounded-md shadow-sm ring-teal-500 appearance-none focus:border-teal-600"
               onChange={handleSelect}>
               <option value="warrior">Warrior</option>
               <option value="rogue">Rogue</option>
@@ -361,12 +365,12 @@ const CharCust = ({handleBattle}) => {
         </div>
         <div className='my-auto'>
           <p className='text-4xl mb-8 text-teal-200 text-center'> Name your Character</p>
-          <input className='text-center p-4 text-xl mb-8 w-full' placeholder="Enter Name"></input>
-          <button className='block w-1/2 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto'
-            type="button"
+          <input className='text-center p-4 text-xl mb-8 w-full bg-gray-700 text-teal-200 placeholder:text-teal-200 border border-teal-200' placeholder="Enter Name"></input>
+          <Link className='block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'
+            to="/battle"
             onClick={handleStartGame}>
             Start Game
-          </button>
+          </Link>
         </div>
       </div>
     </div>
