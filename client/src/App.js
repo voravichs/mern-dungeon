@@ -53,11 +53,8 @@ export default function App() {
   }
 
   const handleBattle = (character, enemy) => {
-    if (character && enemy) {
-      setNewCharacter(character);
-      setNewEnemy(enemy);
-    } 
-    
+    setNewCharacter(character);
+    setNewEnemy(enemy);
   }
 
   return (
@@ -70,7 +67,7 @@ export default function App() {
           <div className='bg-gray-800 h-max pb-1'>
             <div className='flex flex-col lg:flex-row justify-between p-12 bg-gray-900 drop-shadow-xl'>
               <Header />
-              <Navigation currentPage={currentPage} handlePageChange={handlePageChange}/>
+              <Navigation currentPage={currentPage} handlePageChange={handlePageChange} />
             </div>
             <div className='m-16'>
               <Routes>
@@ -92,11 +89,11 @@ export default function App() {
                 />
                 <Route
                   path="/createcharacter"
-                  element={<CharCust handleBattle={handleBattle}/>}
+                  element={<CharCust handleBattle={handleBattle} />}
                 />
                 <Route
                   path="/battle"
-                  element={<Battle character={newCharacter} enemy={newEnemy}/>}
+                  element={<Battle character={newCharacter} enemy={newEnemy} />}
                 />
               </Routes>
             </div>
