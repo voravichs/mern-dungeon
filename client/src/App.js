@@ -8,7 +8,6 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import {BrowserRouter as Router, Link} from 'react-router-dom';
 
 import { Helmet } from 'react-helmet';
 
@@ -64,7 +63,6 @@ export default function App() {
 
   return (
     <ApolloProvider client={client}>
-<<<<<<< HEAD
       <div>
         <Helmet>
           <script src="https://cdn.tailwindcss.com"></script>
@@ -78,50 +76,6 @@ export default function App() {
           </Link>
         </div>
       </Router>
-=======
-      <Router>
-        <div>
-          <Helmet>
-            <script src="https://cdn.tailwindcss.com"></script>
-          </Helmet>
-          <div className='mx-auto bg-gray-800 h-screen '>
-            <div className='flex flex-col lg:flex-row justify-between p-12 bg-gray-900 drop-shadow-xl'>
-              <Header />
-              <Navigation currentPage={currentPage} handlePageChange={handlePageChange}/>
-            </div>
-            <div className='m-16'>
-              <Routes>
-                <Route
-                  path="/"
-                  element={<Home />}
-                />
-                <Route
-                  path="/login"
-                  element={<LogIn />}
-                />
-                <Route
-                  path="/signup"
-                  element={<SignUp />}
-                />
-                <Route
-                  path="/aboutus"
-                  element={<AboutUs />}
-                />
-                <Route
-                  path="/createcharacter"
-                  element={<CharCust handleBattle={handleBattle}/>}
-                />
-                <Route
-                  path="/battle"
-                  element={<Battle character={newCharacter} enemy={newEnemy}/>}
-                />
-              </Routes>
-            </div>
-          </div>
-        </div>
-      </Router>
-
->>>>>>> a9b0491added69792f5271e0d0e7683a7c283759
     </ApolloProvider>
   )
 }
