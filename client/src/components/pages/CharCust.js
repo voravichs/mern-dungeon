@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Player from '../../utils/Player';
+import { Link } from 'react-router-dom';
 
 const special = [
   {
@@ -272,7 +273,6 @@ const CharCust = ({handleBattle}) => {
   const [chosenSprite, setChosenSprite] = useState(charSprites[0]);
 
   const handleStartGame = (e) => {
-    e.preventDefault();
     const newCharacter = new Player(20, 10, 3, 3, 2, chosenSprite.link, "player character");
     const newEnemy = new Player(20, 8, 4, 4, 2, special[8].link, "clown");
     handleBattle(newCharacter, newEnemy);
@@ -362,11 +362,11 @@ const CharCust = ({handleBattle}) => {
         <div className='my-auto'>
           <p className='text-4xl mb-8 text-teal-200 text-center'> Name your Character</p>
           <input className='text-center p-4 text-xl mb-8 w-full' placeholder="Enter Name"></input>
-          <button className='block w-1/2 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto'
-            type="button"
+          <Link className='block w-1/2 text-teal-200 text-2xl bg-blue-00 hover:bg-teal-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto'
+            to="/battle"
             onClick={handleStartGame}>
             Start Game
-          </button>
+          </Link>
         </div>
       </div>
     </div>
