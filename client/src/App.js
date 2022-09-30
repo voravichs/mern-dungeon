@@ -19,6 +19,8 @@ import SignUp from './components/pages/SignUp';
 import CharCust from './components/pages/CharCust';
 import Battle from './components/pages/Battle';
 
+import './css/style.css'
+
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -64,7 +66,7 @@ export default function App() {
           <Helmet>
             <script src="https://cdn.tailwindcss.com"></script>
           </Helmet>
-          <div className='bg-gray-800 h-max pb-1'>
+          <div className='bg-gray-800 pb-1'>
             <div className='flex flex-col lg:flex-row justify-between p-12 bg-gray-900 drop-shadow-xl'>
               <Header />
               <Navigation currentPage={currentPage} handlePageChange={handlePageChange} />
