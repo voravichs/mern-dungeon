@@ -34,8 +34,8 @@ function Navigation({currentPage, handlePageChange}) {
           onClick={() => handlePageChange('SignUp')}
 
           className={currentPage === 'SignUp'
-          ? 'text-blue-500 font-black drop-shadow-xl hover:text-blue-200'
-            : 'text-blue-400 hover:text-blue-100'}
+          ? 'text-blue-500 font-white drop-shadow-xl hover:text-blue-200'
+            : 'text-blue-400 hover:text-green-100'}
         >
           Sign Up
         </Link>
