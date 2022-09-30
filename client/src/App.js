@@ -7,6 +7,8 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
+import {BrowserRouter as Router, Link} from 'react-router-dom';
+
 import { Helmet } from 'react-helmet';
 
 import DungeonContainer from './components/DungeonContainer';
@@ -44,6 +46,13 @@ export default function App() {
         </Helmet>
         <DungeonContainer />
       </div>
+      <Router>
+        <div>
+          <Link to="/aboutme">
+            <button>Click</button>
+          </Link>
+        </div>
+      </Router>
     </ApolloProvider>
   )
 }
