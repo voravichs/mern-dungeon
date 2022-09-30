@@ -51,6 +51,18 @@ function Navigation({ currentPage, handlePageChange }) {
           Sign Up
         </a>
       </li>
+      <li className="mt-4 lg:mr-8">
+        <a
+          href="#install"
+          onClick={() => handlePageChange('Install')}
+
+          className={currentPage === 'Install'
+          ? 'text-blue-400 font-black drop-shadow-xl hover:text-blue-200'
+            : 'text-blue-400 hover:text-blue-100'}
+        >
+          Sign Up
+        </a>
+      </li>
     </ul>
   );
 }

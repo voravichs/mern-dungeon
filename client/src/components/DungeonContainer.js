@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import AboutMe from './pages/AboutMe';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
+import Install from './pages/Install';
 import CharCust from './pages/CharCust';
 import Battle from './pages/Battle';
 
@@ -19,6 +20,9 @@ function DungeonContainer() {
     }
     if (currentPage === 'LogIn') {
       return <LogIn />;
+    }
+    if (currentPage === 'Install'){
+      return <Install/>
     }
     if (currentPage === 'Home') {
       return <Home handlePageChange={handlePageChange}/>;
