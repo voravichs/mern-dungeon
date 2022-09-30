@@ -19,7 +19,8 @@ import SignUp from './components/pages/SignUp';
 import CharCust from './components/pages/CharCust';
 import Battle from './components/pages/Battle';
 
-import './css/style.css'
+import './font/Diaryofan8-bitmage.woff'
+import './css/style.css';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
