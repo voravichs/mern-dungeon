@@ -367,13 +367,13 @@ const CharCust = ({ handleBattle }) => {
           <div className='my-auto'>
             <p className='text-4xl mb-8 text-teal-200 text-center'> Name your Character</p>
             <input className='text-center p-4 text-xl mb-8 w-full bg-gray-700 text-teal-200 placeholder:text-teal-200 border border-teal-200' placeholder="Enter Name"></input>
-            <Link className='block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'
+            <Link className='block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'
               to="/battle"
               onClick={handleStartGame}>
               Start Game
             </Link>
           </div>
-        </div>
+
       </div>
     </div>
   );
