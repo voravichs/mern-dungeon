@@ -35,6 +35,13 @@ const resolvers = {
 
       return { token, user };
     },
+    saveCharacter: async (parent, { id, character }) => {
+      return User.findByIdAndUpdate(
+        { _id: id },
+        { $push: { savedChars: character } },
+        { new: true }
+      );
+    },
   },
 };
 

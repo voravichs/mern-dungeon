@@ -19,6 +19,12 @@ const typeDefs = gql`
     link: String
   }
 
+  input InputCharacter {
+    charId: ID!
+    name: String
+    link: String
+  }
+
   type Query {
     users: [User]
     singleUser(id: ID!): User
@@ -27,6 +33,7 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
+    saveCharacter(id: ID!, newCharacter: InputCharacter!): User
   }
 `;
 
