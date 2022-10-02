@@ -18,3 +18,18 @@ export const GET_SINGLE_USER = gql`
     }
   }
 `;
+
+export const GET_SINGLE_CHARACTER = gql`
+  query singleCharacter($id: ID!) {
+    singleCharacter(_id: $id) {
+      _id
+      name
+      link
+      level
+      health
+      attack
+      defense
+    }
+  }
+`;
+

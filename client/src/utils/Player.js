@@ -1,6 +1,7 @@
 export default class Player {
     //constructor
-    constructor(maxHealth, attack, defense, portrait, altText) {
+    constructor(level, maxHealth, attack, defense, portrait, altText) {
+        this.level = level;
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
         this.attack = attack;
@@ -50,6 +51,7 @@ export default class Player {
     }
     //level up function
     levelup() {
+        this.level++;
         this.maxHealth = this.maxHealth + 5;
         this.currentHealth = this.currentHealth + 5;
         this.attack = this.attack + 1;

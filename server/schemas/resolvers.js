@@ -8,11 +8,13 @@ const resolvers = {
       return await User.find().populate('savedChars');
     },
     singleUser: async (parent, { username}) => {
-      console.log(username)
       return await User.findOne({username}).populate('savedChars');
     },
     characters: async () => {
       return await Character.find();
+    },
+    singleCharacter: async (parent, {_id}) => {
+      return await Character.findOne({_id});
     },
   },
 
