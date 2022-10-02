@@ -277,9 +277,9 @@ const CharCust = ({ handleBattle }) => {
   const [chosenSprite, setChosenSprite] = useState(charSprites[0]);
 
   const handleStartGame = (e) => {
-    const newCharacter = new Player(20, 5, 2, chosenSprite.link, "player character");
-    const newEnemy = new Player(20, 4, 2, special[9].link, "clown");
-    handleBattle(newCharacter, newEnemy);
+   //const newCharacter = new Player(20, 5, 2, chosenSprite.link, "player character");
+   //const newEnemy = new Player(20, 4, 2, special[9].link, "clown");
+   //handleBattle(newCharacter, newEnemy);
   }
 
   const handleNext = (e) => {
@@ -334,7 +334,7 @@ const CharCust = ({ handleBattle }) => {
   }
 
   return (
-    <div class="rounded-lg border-4 bg-gradient-to-b from-gray-200 to-gray-500 p-2">
+    <div className="rounded-lg border-4 bg-gradient-to-b from-gray-200 to-gray-500 p-2">
       <div className='bg-gradient-to-b from-blue-600 to-indigo-900 p-8'>
         <h1 className='text-4xl md:text-5xl mb-12 text-teal-400 text-center py-3'>Character Creation</h1>
         <div className='md:grid grid-cols-2'>
@@ -342,12 +342,12 @@ const CharCust = ({ handleBattle }) => {
             <p className='text-4xl text-teal-200 text-center'> Select A Portrait</p>
             <img className="w-2/3 mx-auto" src={chosenSprite.link} alt={chosenSprite.name}></img>
             <div className='flex mb-8'>
-              <button className='block md:w-1/4 text-teal-200 text-2xl bg-blue-00 hover:bg-gray-700 transition-all ring-2 rounded-lg ring-teal-500 p-auto py-4 mx-auto'
+              <button className='block w-5/12 text-teal-200 text-2xl bg-blue-00 hover:bg-gray-700 transition-all ring-2 rounded-lg ring-teal-500 p-auto py-4 mx-auto'
                 type="button"
                 onClick={handlePrev}>
                 Prev
               </button>
-              <button className='block md:w-1/4 text-teal-200 text-2xl bg-blue-00 hover:bg-gray-700 transition-all ring-2 rounded-lg ring-teal-500 p-auto py-4 mx-auto'
+              <button className='block w-5/12 text-teal-200 text-2xl bg-blue-00 hover:bg-gray-700 transition-all ring-2 rounded-lg ring-teal-500 p-auto py-4 mx-auto'
                 type="button"
                 onClick={handleNext}>
                 Next
