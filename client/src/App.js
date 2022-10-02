@@ -19,6 +19,7 @@ import SignUp from './components/pages/SignUp';
 import CharCust from './components/pages/CharCust';
 import Battle from './components/pages/Battle';
 import Profile from './components/pages/Profile';
+import BountyBoard from './components/pages/BountyBoard';
 
 import './font/Diaryofan8-bitmage.woff'
 import './css/style.css';
@@ -93,7 +94,7 @@ export default function App() {
                 />
                 <Route
                   path="/createcharacter"
-                  element={<CharCust handleBattle={handleBattle} />}
+                  element={<CharCust/>}
                 />
                 <Route
                   path="/battle"
@@ -102,6 +103,10 @@ export default function App() {
                 <Route
                   path="/profile/:username"
                   element={<Profile />}
+                />
+                <Route
+                  path="/bounties/:username"
+                  element={<BountyBoard handleBattle={handleBattle}/>}
                 />
               </Routes>
             </div>

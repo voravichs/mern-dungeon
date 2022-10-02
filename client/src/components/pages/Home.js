@@ -23,7 +23,7 @@ export default function Home() {
                 Register a New Adventurer
               </Link>
               <Link
-                to="/createcharacter"
+                to={`/bounties/${Auth.getProfile().data.username}`}
                 className='block lg:w-1/2 mt-8 text-teal-200 text-2xl bg-blue-00 hover:bg-blue-800 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 text-center mx-auto' >
                 Accept a Bounty from the Board
               </Link>

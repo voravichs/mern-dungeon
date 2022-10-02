@@ -25,6 +25,18 @@ export default function AboutMe() {
           Stephen "Redshrike" Challener, hosted on OpenGameArt.org
           </a>, for the pixel enemy assets
         </li>
+        <li className='text-teal-100'>
+          <a className='text-teal-300' href='https://opengameart.org/content/mountain-at-dusk-background' target="_blank" rel="noreferrer">
+          ansimuz, hosted on OpenGameArt.org
+          </a>, for the mountain background asset
+        </li>
+        
+        <li className='text-teal-100'>
+          <a className='text-teal-300' href='https://opengameart.org/content/paper-popup-backgrounds' target="_blank" rel="noreferrer">
+          ztn and darkwood67, hosted on OpenGameArt.org
+          </a>, for paper background asset
+        </li>
+        
     </div>
   );
 }

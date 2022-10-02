@@ -276,10 +276,11 @@ const warriors = [
 
 let charSprites = warriors;
 
-const CharCust = ({ handleBattle }) => {
+const CharCust = () => {
   const [formState, setFormState] = useState({ name: '' });
   const [currentSprite, setCurrentSprite] = useState(0);
   const [chosenSprite, setChosenSprite] = useState(charSprites[0]);
+  const [saved, setSaved] = useState(false);
   const [saveChar] = useMutation(SAVE_CHARACTER);
 
   const handleChange = (event) => {
@@ -290,8 +291,8 @@ const CharCust = ({ handleBattle }) => {
       [name]: value,
     });
   };
-  
-  const handleStartGame = async (event) => {
+
+  const handleCreate = async (event) => {
     event.preventDefault();
     try {
       await saveChar({
@@ -307,12 +308,10 @@ const CharCust = ({ handleBattle }) => {
           }
         }
       });
+      setSaved(true);
     } catch (e) {
       console.error(e);
     }
-    //const newCharacter = new Player(20, 5, 2, chosenSprite.link, "player character");
-   //const newEnemy = new Player(20, 4, 2, special[9].link, "clown");
-   //handleBattle(newCharacter, newEnemy);
   }
 
   const handleNext = (e) => {
@@ -397,21 +396,34 @@ const CharCust = ({ handleBattle }) => {
               </select>
             </div>
           </div>
-          <form className='my-auto' onSubmit={handleStartGame}>
-            <p className='text-4xl mb-8 text-teal-200 text-center'> Name your Character</p>
-            <input 
-              className='text-center p-4 text-xl mb-8 w-full bg-gray-700 text-teal-200 placeholder:text-teal-200 border border-teal-200' 
-              placeholder="Enter Name"
-              name="name"
-              value={formState.name}
-              onChange={handleChange}
-            />
-            <button className='text-center block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'>
-              <Link 
-                to="/">
+          <form className='my-auto h-full md:relative' onSubmit={handleCreate}>
+            <div className='mt-24 md:mt-0'>
+              <p className='text-4xl mb-8 text-teal-200 text-center'> Name your Character</p>
+              <input
+                className='text-center p-4 text-xl mb-8 w-full bg-gray-700 text-teal-200 placeholder:text-teal-200 border border-teal-200'
+                placeholder="Enter Name"
+                name="name"
+                value={formState.name}
+                onChange={handleChange}
+              />
+              <button
+                className='text-center block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'
+                type="submit">
                 Create
-              </Link>
-            </button>
+              </button>  
+            </div>
+            {saved && (
+              <p className="text-xl mt-4 text-slate-50 text-center">
+                Character Saved! 
+                <br></br>It may take a few seconds to register them. 
+                You may now return to the main menu.
+              </p>  
+            )}
+            <Link
+              className='mt-12 md:absolute md:bottom-0 md:right-0 block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'
+              to="/">
+              Return to Main Menu
+            </Link>
           </form>
         </div>
       </div>

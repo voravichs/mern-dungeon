@@ -14,6 +14,7 @@ export default function Profile() {
     const characters = data?.singleUser.savedChars || [];
     return (
         <div>
+            <p className='text-4xl md:text-5xl mb-12 text-teal-400 text-center py-3'>Your Characters</p>
             {loading ? (
                 <div>Loading...</div>
             ) : (
