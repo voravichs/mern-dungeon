@@ -1,12 +1,12 @@
 export default class Player {
     //constructor
-    constructor(maxHealth, attack, magic, defense, mDefense, portrait, altText) {
+    constructor(maxHealth, attack, defense, portrait, altText) {
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
         this.attack = attack;
-        this.magic = magic;
+        //this.magic = magic;
         this.defense = defense;
-        this.mDefense = mDefense;
+        //this.mDefense = mDefense;
         this.portrait = portrait;
         this.altText = altText;
         this.dead = false;

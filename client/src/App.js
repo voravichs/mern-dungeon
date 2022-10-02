@@ -68,7 +68,7 @@ export default function App() {
             <script src="https://cdn.tailwindcss.com"></script>
           </Helmet>
           <div className='bg-gray-800 pb-1'>
-            <div className='flex flex-col lg:flex-row justify-between p-12 bg-gray-900 drop-shadow-xl'>
+            <div className='flex flex-col lg:flex-row p-12 bg-gradient-to-b from-gray-800 to-gray-900 drop-shadow-xl'>
               <Header />
               <Navigation currentPage={currentPage} handlePageChange={handlePageChange} />
             </div>

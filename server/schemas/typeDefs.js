@@ -5,7 +5,7 @@ const typeDefs = gql`
     _id: ID!
     username: String!
     email: String!
-    savedChars: [Character]
+    savedChars: [Character]!
   }
 
   type Auth {
@@ -14,26 +14,34 @@ const typeDefs = gql`
   }
 
   type Character {
-    charId: ID!
+    _id: ID!
     name: String
     link: String
+    level: Int
+    health: Int
+    attack: Int
+    defense: Int
   }
 
-  input InputCharacter {
-    charId: ID!
+  input inputCharacter {
     name: String
     link: String
+    level: Int
+    health: Int
+    attack: Int
+    defense: Int
   }
 
   type Query {
     users: [User]
-    singleUser(id: ID!): User
+    singleUser(_id: ID!): User
+    characters: [Character]
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveCharacter(id: ID!, newCharacter: InputCharacter!): User
+    saveCharacter(_id: ID!, newCharacter: inputCharacter!): Character
   }
 `;
 

@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const characterSchema = new Schema({
   name: {
@@ -7,6 +7,21 @@ const characterSchema = new Schema({
   link: {
     type: String,
   },
+  level: {
+    type: Number,
+  },
+  health: {
+    type: Number,
+  },
+  attack: {
+    type: Number,
+  },
+  defense: {
+    type: Number,
+  },
 });
 
-module.exports = characterSchema;
+
+const Character = model('Character', characterSchema);
+
+module.exports = Character;

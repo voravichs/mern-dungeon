@@ -277,8 +277,8 @@ const CharCust = ({ handleBattle }) => {
   const [chosenSprite, setChosenSprite] = useState(charSprites[0]);
 
   const handleStartGame = (e) => {
-    const newCharacter = new Player(20, 10, 3, 3, 2, chosenSprite.link, "player character");
-    const newEnemy = new Player(20, 8, 4, 4, 2, special[9].link, "clown");
+    const newCharacter = new Player(20, 5, 2, chosenSprite.link, "player character");
+    const newEnemy = new Player(20, 4, 2, special[9].link, "clown");
     handleBattle(newCharacter, newEnemy);
   }
 
@@ -373,7 +373,7 @@ const CharCust = ({ handleBattle }) => {
               Start Game
             </Link>
           </div>
-
+        </div>
       </div>
     </div>
   );
