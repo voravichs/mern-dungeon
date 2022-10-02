@@ -7,9 +7,9 @@ const resolvers = {
     users: async () => {
       return await User.find().populate('savedChars');
     },
-    singleUser: async (parent, { _id }) => {
-      console.log(_id)
-      return await User.findOne({_id}).populate('savedChars');
+    singleUser: async (parent, { username}) => {
+      console.log(username)
+      return await User.findOne({username}).populate('savedChars');
     },
     characters: async () => {
       return await Character.find();
@@ -39,11 +39,11 @@ const resolvers = {
 
       return { token, user };
     },
-    saveCharacter: async (parent, { _id, newCharacter}) => {
+    saveCharacter: async (parent, { username, newCharacter}) => {
       const character = await Character.create(newCharacter);
 
       await User.findOneAndUpdate(
-        { _id: _id },
+        { username: username },
         { $addToSet: { savedChars: character._id } }
       );
 

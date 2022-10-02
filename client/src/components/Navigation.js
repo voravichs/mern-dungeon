@@ -37,6 +37,18 @@ function Navigation({ currentPage, handlePageChange }) {
       {Auth.loggedIn() ? (
         <>
           <li className="mt-4 lg:mr-8">
+            <Link
+              to={`/profile/${Auth.getProfile().data.username}`}
+              onClick={() => handlePageChange('Profile')}
+
+              className={currentPage === 'Profile'
+                ? 'text-blue-500 font-black drop-shadow-xl hover:text-blue-200'
+                : 'text-blue-400 hover:text-blue-100'}
+            >
+              My Profile
+            </Link>
+          </li>
+          <li className="mt-4 lg:mr-8">
             <button className="text-blue-400 hover:text-blue-100" onClick={logout}>
               Logout
             </button>

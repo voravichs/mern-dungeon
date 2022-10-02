@@ -36,14 +36,14 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_CHARACTER = gql`
-  mutation saveCharacter($id: ID!, $newCharacter: inputCharacter!) {
-    saveCharacter(_id: $id, newCharacter: $newCharacter) {
+  mutation SaveCharacter($username: String!, $newCharacter: inputCharacter!) {
+    saveCharacter(username: $username, newCharacter: $newCharacter) {
       _id
       name
       link
       level
-      attack
       health
+      attack
       defense
     }
   }

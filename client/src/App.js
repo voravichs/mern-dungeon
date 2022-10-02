@@ -18,6 +18,7 @@ import LogIn from './components/pages/LogIn';
 import SignUp from './components/pages/SignUp';
 import CharCust from './components/pages/CharCust';
 import Battle from './components/pages/Battle';
+import Profile from './components/pages/Profile';
 
 import './font/Diaryofan8-bitmage.woff'
 import './css/style.css';
@@ -97,6 +98,10 @@ export default function App() {
                 <Route
                   path="/battle"
                   element={<Battle character={newCharacter} enemy={newEnemy} />}
+                />
+                <Route
+                  path="/profile/:username"
+                  element={<Profile />}
                 />
               </Routes>
             </div>

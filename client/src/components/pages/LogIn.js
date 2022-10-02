@@ -20,7 +20,6 @@ const LogIn = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
     try {
       const { data } = await login({
         variables: { ...formState },
@@ -41,7 +40,7 @@ const LogIn = () => {
   return (
     <main className="rounded-lg border-4 bg-gradient-to-b from-gray-200 to-gray-500 p-2 lg:w-3/4 mx-auto">
       <div className="bg-gradient-to-b from-blue-600 to-indigo-900 p-8">
-        <h1 className="text-4xl md:text-5xl mb-12 text-teal-400 text-center py-3">Report to the Guild's Job Board</h1>
+        <h1 className="text-4xl md:text-5xl mb-12 text-teal-400 text-center py-3">Welcome back! <br></br>Sign in to the Guild's Logbook:</h1>
         <form className="grid grid-rows-3" onSubmit={handleFormSubmit}>
           <input
             className="md:w-3/4 xl:w-2/3 mx-auto p-4 text-xl mb-8 w-full bg-gray-700 text-teal-200 placeholder:text-teal-200 border border-teal-200"

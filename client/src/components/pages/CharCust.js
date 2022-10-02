@@ -1,6 +1,10 @@
 import { useState } from 'react';
-import Player from '../../utils/Player';
 import { Link } from 'react-router-dom';
+
+import Auth from '../../utils/auth';
+
+import { useMutation } from '@apollo/client';
+import { SAVE_CHARACTER } from '../../utils/mutations';
 
 const special = [
   {
@@ -273,11 +277,40 @@ const warriors = [
 let charSprites = warriors;
 
 const CharCust = ({ handleBattle }) => {
+  const [formState, setFormState] = useState({ name: '' });
   const [currentSprite, setCurrentSprite] = useState(0);
   const [chosenSprite, setChosenSprite] = useState(charSprites[0]);
+  const [saveChar] = useMutation(SAVE_CHARACTER);
 
-  const handleStartGame = (e) => {
-   //const newCharacter = new Player(20, 5, 2, chosenSprite.link, "player character");
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+  
+  const handleStartGame = async (event) => {
+    event.preventDefault();
+    try {
+      await saveChar({
+        variables: {
+          "username": `${Auth.getProfile().data.username}`,
+          "newCharacter": {
+            "name": formState.name,
+            "link": chosenSprite.link,
+            "level": 7,
+            "health": 70,
+            "attack": 12,
+            "defense": 19
+          }
+        }
+      });
+    } catch (e) {
+      console.error(e);
+    }
+    //const newCharacter = new Player(20, 5, 2, chosenSprite.link, "player character");
    //const newEnemy = new Player(20, 4, 2, special[9].link, "clown");
    //handleBattle(newCharacter, newEnemy);
   }
@@ -364,15 +397,22 @@ const CharCust = ({ handleBattle }) => {
               </select>
             </div>
           </div>
-          <div className='my-auto'>
+          <form className='my-auto' onSubmit={handleStartGame}>
             <p className='text-4xl mb-8 text-teal-200 text-center'> Name your Character</p>
-            <input className='text-center p-4 text-xl mb-8 w-full bg-gray-700 text-teal-200 placeholder:text-teal-200 border border-teal-200' placeholder="Enter Name"></input>
-            <Link className='block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'
-              to="/battle"
-              onClick={handleStartGame}>
-              Start Game
-            </Link>
-          </div>
+            <input 
+              className='text-center p-4 text-xl mb-8 w-full bg-gray-700 text-teal-200 placeholder:text-teal-200 border border-teal-200' 
+              placeholder="Enter Name"
+              name="name"
+              value={formState.name}
+              onChange={handleChange}
+            />
+            <button className='text-center block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'>
+              <Link 
+                to="/">
+                Create
+              </Link>
+            </button>
+          </form>
         </div>
       </div>
     </div>
