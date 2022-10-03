@@ -7,6 +7,7 @@
   3. [Screenshots](#screenshots)
   4. [License](#license)
   5. [Credits](#credits)
+  6. [Links/(#links)
 
   ## Description 
 
@@ -83,6 +84,10 @@ Read more about this license at: https://choosealicense.com/licenses/gpl-3.0/
  Voravich Silapachairueng: https://github.com/voravichs
 
  Wyatt Willner: https://github.com/wyattwillner55
+ 
+ ## Deployed Link 
+ 
+ https://pixel-battle-v.herokuapp.com/
 
 
 
