@@ -17,14 +17,14 @@ export default class Player {
         let rng = Math.floor(Math.random() * 11); 
         console.log("rng: "+ rng);
         console.log("attack "+ (this.attack - target.defense));
-        if (rng < 2) return 0;
+        if ((rng < 2)||((this.attack - target.defense) <= 0)) return 0;
         else if (2 <= rng && rng < 10) {
             target.currentHealth = target.currentHealth - (this.attack - target.defense);
             return  (this.attack - target.defense);
         }
         if (rng === 10) {
             target.currentHealth = target.currentHealth - (1.5 * this.attack - target.defense);
-            return  (1.5 * (this.attack - target.defense));
+            return  Math.floor(1.5 * (this.attack - target.defense));
         }
     }
     magicAttack(target) {
