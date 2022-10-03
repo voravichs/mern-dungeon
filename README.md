@@ -85,7 +85,7 @@ Read more about this license at: https://choosealicense.com/licenses/gpl-3.0/
 
  Wyatt Willner: https://github.com/wyattwillner55
  
- ## Deployed Link 
+ ## Link 
  
  https://pixel-battle-v.herokuapp.com/
 
