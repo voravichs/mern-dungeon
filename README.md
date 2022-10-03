@@ -70,8 +70,6 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
 
-  To use the app simply create an account either as a dm or a player using the sign up option. From there you can access your profile and manage your campaigns as a DM. ALternatively if you have a player account, you can manage your characters, and which campaigns that character is in.
-
 "Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights."
 
 Read more about this license at: https://choosealicense.com/licenses/gpl-3.0/
