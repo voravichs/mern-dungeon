@@ -7,7 +7,7 @@
   3. [Screenshots](#screenshots)
   4. [License](#license)
   5. [Credits](#credits)
-  6. [Links]/(#links)
+  6. [Links](#links)
 
   ## Description 
 
