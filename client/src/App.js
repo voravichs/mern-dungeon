@@ -8,7 +8,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { Helmet } from 'react-helmet';
+
 
 import Navigation from './components/Navigation';
 import Header from './components/Header';
@@ -18,9 +18,11 @@ import LogIn from './components/pages/LogIn';
 import SignUp from './components/pages/SignUp';
 import CharCust from './components/pages/CharCust';
 import Battle from './components/pages/Battle';
+import Profile from './components/pages/Profile';
+import BountyBoard from './components/pages/BountyBoard';
 
 import './font/Diaryofan8-bitmage.woff'
-import './css/style.css';
+import './css/tailwind.css'
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -64,11 +66,8 @@ export default function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <Helmet>
-            <script src="https://cdn.tailwindcss.com"></script>
-          </Helmet>
           <div className='bg-gray-800 pb-1'>
-            <div className='flex flex-col lg:flex-row justify-between p-12 bg-gray-900 drop-shadow-xl'>
+            <div className='flex flex-col lg:flex-row p-12 bg-gradient-to-b from-gray-800 to-gray-900 drop-shadow-xl'>
               <Header />
               <Navigation currentPage={currentPage} handlePageChange={handlePageChange} />
             </div>
@@ -92,11 +91,19 @@ export default function App() {
                 />
                 <Route
                   path="/createcharacter"
-                  element={<CharCust handleBattle={handleBattle} />}
+                  element={<CharCust/>}
                 />
                 <Route
                   path="/battle"
                   element={<Battle character={newCharacter} enemy={newEnemy} />}
+                />
+                <Route
+                  path="/profile/:username"
+                  element={<Profile />}
+                />
+                <Route
+                  path="/bounties/:username"
+                  element={<BountyBoard handleBattle={handleBattle}/>}
                 />
               </Routes>
             </div>

@@ -1,14 +1,20 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Character} = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find();
+      return await User.find().populate('savedChars');
     },
-    singleUser: async (parent, args) => {
-      const userData = await User.findOne({ _id: args.id });
+    singleUser: async (parent, { username}) => {
+      return await User.findOne({username}).populate('savedChars');
+    },
+    characters: async () => {
+      return await Character.find();
+    },
+    singleCharacter: async (parent, {_id}) => {
+      return await Character.findOne({_id});
     },
   },
 
@@ -35,13 +41,17 @@ const resolvers = {
 
       return { token, user };
     },
-    saveCharacter: async (parent, { id, character }) => {
-      return User.findByIdAndUpdate(
-        { _id: id },
-        { $push: { savedChars: character } },
-        { new: true }
+    saveCharacter: async (parent, { username, newCharacter}) => {
+      const character = await Character.create(newCharacter);
+
+      await User.findOneAndUpdate(
+        { username: username },
+        { $addToSet: { savedChars: character._id } }
       );
+
+      return character;
     },
+
   },
 };
 

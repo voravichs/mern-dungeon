@@ -1,6 +1,10 @@
 import { useState } from 'react';
-import Player from '../../utils/Player';
 import { Link } from 'react-router-dom';
+
+import Auth from '../../utils/auth';
+
+import { useMutation } from '@apollo/client';
+import { SAVE_CHARACTER } from '../../utils/mutations';
 
 const special = [
   {
@@ -272,14 +276,50 @@ const warriors = [
 
 let charSprites = warriors;
 
-const CharCust = ({ handleBattle }) => {
+const CharCust = () => {
+  const [formState, setFormState] = useState({ name: '' });
   const [currentSprite, setCurrentSprite] = useState(0);
   const [chosenSprite, setChosenSprite] = useState(charSprites[0]);
+  const [saved, setSaved] = useState(false);
+  const [preset, setPreset] = useState({
+    name: "Weak",
+    level: 1,
+    health: 10,
+    attack: 4,
+    defense: 1
+  });
 
-  const handleStartGame = (e) => {
-    const newCharacter = new Player(20, 10, 3, 3, 2, chosenSprite.link, "player character");
-    const newEnemy = new Player(20, 8, 4, 4, 2, special[9].link, "clown");
-    handleBattle(newCharacter, newEnemy);
+  const [saveChar] = useMutation(SAVE_CHARACTER);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  const handleCreate = async (event) => {
+    event.preventDefault();
+    try {
+      await saveChar({
+        variables: {
+          "username": `${Auth.getProfile().data.username}`,
+          "newCharacter": {
+            "name": formState.name,
+            "link": chosenSprite.link,
+            "level": preset.level,
+            "health": preset.health,
+            "attack": preset.attack,
+            "defense": preset.defense
+          }
+        }
+      });
+      setSaved(true);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   const handleNext = (e) => {
@@ -333,21 +373,73 @@ const CharCust = ({ handleBattle }) => {
     }
   }
 
+  const handlePreset = (e) => {
+    switch (e.target.value) {
+      case "weak":
+        setPreset({
+          name:"Weak",
+          level: 1,
+          health: 10,
+          attack: 4,
+          defense: 1
+        })
+        break;
+      case "strong":
+        setPreset({
+          name: "Strong",
+          level: 10,
+          health: 40,
+          attack: 20,
+          defense: 3
+        })
+        break;
+      case "robust":
+        setPreset({
+          name: "Robust",
+          level: 10,
+          health: 120,
+          attack: 7,
+          defense: 5
+        })
+        break;
+      case "sturdy":
+        setPreset({
+          name: "Sturdy",
+          level: 10,
+          health: 60,
+          attack: 6,
+          defense: 15
+        })
+        break;
+      case "hacker":
+        setPreset({
+          name: "Hacker",
+          level: 999,
+          health: 1000,
+          attack: 200,
+          defense: 90
+        })
+        break;
+      default:
+        break;
+    }
+  }
+
   return (
-    <div class="rounded-lg border-4 bg-gradient-to-b from-gray-200 to-gray-500 p-2">
+    <div className="rounded-lg border-4 bg-gradient-to-b from-gray-200 to-gray-500 p-2">
       <div className='bg-gradient-to-b from-blue-600 to-indigo-900 p-8'>
         <h1 className='text-4xl md:text-5xl mb-12 text-teal-400 text-center py-3'>Character Creation</h1>
-        <div className='md:grid grid-cols-2'>
+        <div className='grid lg:grid-cols-2'>
           <div>
             <p className='text-4xl text-teal-200 text-center'> Select A Portrait</p>
             <img className="w-2/3 mx-auto" src={chosenSprite.link} alt={chosenSprite.name}></img>
             <div className='flex mb-8'>
-              <button className='block md:w-1/4 text-teal-200 text-2xl bg-blue-00 hover:bg-gray-700 transition-all ring-2 rounded-lg ring-teal-500 p-auto py-4 mx-auto'
+              <button className='block w-5/12 text-teal-200 text-2xl bg-blue-00 hover:bg-gray-700 transition-all ring-2 rounded-lg ring-teal-500 p-auto py-4 mx-auto'
                 type="button"
                 onClick={handlePrev}>
                 Prev
               </button>
-              <button className='block md:w-1/4 text-teal-200 text-2xl bg-blue-00 hover:bg-gray-700 transition-all ring-2 rounded-lg ring-teal-500 p-auto py-4 mx-auto'
+              <button className='block w-5/12 text-teal-200 text-2xl bg-blue-00 hover:bg-gray-700 transition-all ring-2 rounded-lg ring-teal-500 p-auto py-4 mx-auto'
                 type="button"
                 onClick={handleNext}>
                 Next
@@ -355,7 +447,7 @@ const CharCust = ({ handleBattle }) => {
             </div>
             <p className='text-3xl mb-4 text-teal-200 text-center'>Portrait Style</p>
             <div className="w-1/2 lg:max-w-sm mx-auto pb-3">
-              <select className="w-full p-2.5 text-teal-200 bg-gray-700 border border-teal-200 rounded-md shadow-sm ring-teal-500 appearance-none focus:border-teal-600"
+              <select className="w-full p-2.5 text-teal-200 bg-gray-700 hover:bg-gray-600 border border-teal-200 rounded-md shadow-sm ring-teal-500 appearance-none focus:border-teal-600"
                 onChange={handleSelect}>
                 <option value="warrior">Warrior</option>
                 <option value="rogue">Rogue</option>
@@ -364,16 +456,51 @@ const CharCust = ({ handleBattle }) => {
               </select>
             </div>
           </div>
-          <div className='my-auto'>
-            <p className='text-4xl mb-8 text-teal-200 text-center'> Name your Character</p>
-            <input className='text-center p-4 text-xl mb-8 w-full bg-gray-700 text-teal-200 placeholder:text-teal-200 border border-teal-200' placeholder="Enter Name"></input>
-            <Link className='block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'
-              to="/battle"
-              onClick={handleStartGame}>
-              Start Game
+          <form className='my-auto h-full md:relative' onSubmit={handleCreate}>
+            <div className='mt-24 md:mt-0'>
+              <p className='text-4xl mb-8 text-teal-200 text-center'> Name your Character</p>
+              <input
+                className='text-center p-4 text-xl mb-8 w-full bg-gray-700 text-teal-200 placeholder:text-teal-200 border border-teal-200'
+                placeholder="Enter Name"
+                name="name"
+                value={formState.name}
+                onChange={handleChange}
+              />
+              <p className='text-3xl mb-4 text-teal-200 text-center'>Select a Preset</p>
+              <div className="w-1/2 lg:max-w-sm mx-auto pb-3">
+                <select className="mb-8 w-full p-2.5 text-teal-200 bg-gray-700 hover:bg-gray-600 border border-teal-200 rounded-md shadow-sm ring-teal-500 appearance-none focus:border-teal-600"
+                  onChange={handlePreset}>
+                  <option value="weak">Weak</option>
+                  <option value="strong">Strong</option>
+                  <option value="robust">Robust</option>
+                  <option value="strong">Sturdy</option>
+                  <option value="hacker">Hacker</option>
+                </select>
+              </div>
+              <p className='text-2xl mb-4 text-white text-center'> Level: {preset.level}</p>
+              <p className='text-2xl mb-4 text-white text-center'> HP: {preset.health}</p>
+              <p className='text-2xl mb-4 text-white text-center'> Attack: {preset.attack}</p>
+              <p className='text-2xl mb-4 text-white text-center'> Defense: {preset.defense}</p>
+              <button
+                className='mt-8 text-center block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3 '
+                type="submit">
+                Create
+              </button>
+            </div>
+            {saved && (
+              <p className="text-xl mt-4 text-white text-center">
+                Character Saved!
+                <br></br>It may take a few seconds to register them.
+                You may now return to the main menu.
+              </p>
+            )}
+            <Link
+              className='mt-24 block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'
+              to="/">
+              Return to Main Menu
             </Link>
-          </div>
-
+          </form>
+        </div>
       </div>
     </div>
   );
