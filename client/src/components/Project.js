@@ -16,7 +16,7 @@ function Project(props) {
           </object>
         </figure>
       </a>
-    </li >
+    </li>
   );
 }
 
