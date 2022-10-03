@@ -1,109 +1,85 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
 
-import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
 
+import Auth from '../../utils/auth';
 
 const SignUp = () => {
-  // set initial form state
-  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  // set state for form validation
-  const [validated] = useState(false);
-  // set state for alert
-  const [showAlert, setShowAlert] = useState(false);
-  // define mutation for adding user
-  const [createUser] = useMutation(ADD_USER);
+  const [formState, setFormState] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+  const [addUser, { error }] = useMutation(ADD_USER);
 
-  const handleInputChange = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
     try {
-      const { data } = await createUser({
-        variables: { ...userFormData }
+      const { data } = await addUser({
+        variables: { ...formState },
       });
 
       Auth.login(data.addUser.token);
-    } catch (err) {
-      console.error(err);
-      setShowAlert(true);
+    } catch (e) {
+      console.error(e);
     }
-
-    setUserFormData({
-      username: '',
-      email: '',
-      password: '',
-    });
   };
 
   return (
-    <>
-      {/* This is needed for the validation functionality above */}
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
-        </Alert>
-
-        <Form.Group>
-          <Form.Label htmlFor='username'>Username</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your username'
-            name='username'
-            onChange={handleInputChange}
-            value={userFormData.username}
-            required
+    <main className="rounded-lg border-4 bg-gradient-to-b from-gray-200 to-gray-500 p-2 lg:w-3/4 mx-auto">
+      <div className="bg-gradient-to-b from-blue-600 to-indigo-900 p-8">
+        <h1 className="text-4xl md:text-5xl mb-12 text-teal-400 text-center py-3">Enlist in the Adventurer's Guild:</h1>
+        <form className="grid grid-rows-4" onSubmit={handleFormSubmit}>
+          <input
+            className="md:w-3/4 xl:w-2/3 mx-auto p-4 text-xl mb-8 w-full bg-gray-700 text-teal-200 placeholder:text-teal-200 border border-teal-200"
+            placeholder="Your username"
+            name="username"
+            type="text"
+            value={formState.name}
+            onChange={handleChange}
           />
-          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder='Your email address'
-            name='email'
-            onChange={handleInputChange}
-            value={userFormData.email}
-            required
+          <input
+            className="md:w-3/4 xl:w-2/3 mx-auto p-4 text-xl mb-8 w-full bg-gray-700 text-teal-200 placeholder:text-teal-200 border border-teal-200"
+            placeholder="Your email"
+            name="email"
+            type="email"
+            value={formState.email}
+            onChange={handleChange}
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleInputChange}
-            value={userFormData.password}
-            required
+          <input
+            className="md:w-3/4 xl:w-2/3 mx-auto p-4 text-xl mb-8 w-full bg-gray-700 text-teal-200 placeholder:text-teal-200 border border-teal-200"
+            placeholder="******"
+            name="password"
+            type="password"
+            value={formState.password}
+            onChange={handleChange}
           />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
-        <Button
-          disabled={!(userFormData.username && userFormData.email && userFormData.password)}
-          type='submit'
-          variant='success'>
-          Submit
-        </Button>
-      </Form>
-    </>
+          <button
+            className="block w-1/2 text-teal-200 text-3xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3"
+            style={{ cursor: 'pointer' }}
+            type="submit"
+          >
+            Sign Up
+          </button>
+        </form>
+        {error && (
+          <div className="text-2xl mt-8 text-slate-50 text-center">
+            {error.message}
+          </div>
+        )}
+      </div>
+    </main>
   );
 };
 

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mernDungeon', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/pixelBattleDB', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
