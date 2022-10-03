@@ -106,24 +106,20 @@ export default function BountyBoard({ handleBattle }) {
     }
 
     const handleStartBattle = (e) => {
-        if (characterSelected) {
-            const chosenEnemy = enemies[e.target.title - 1];
-            const { enemyName, enemyLink, enemyLevel, enemyHP, enemyAttack, enemyDefense } = chosenEnemy;
-            const { name, level, health, attack, defense } = chosenCharacter;
-            const character = new Player(level, health, attack, defense, chosenCharacter.link, name);
-            const enemy = new Player(enemyLevel, enemyHP, enemyAttack, enemyDefense, enemyLink, enemyName);
-            handleBattle(character, enemy);
-        }
+        const chosenEnemy = enemies[e.target.title - 1];
+        const { enemyName, enemyLink, enemyLevel, enemyHP, enemyAttack, enemyDefense } = chosenEnemy;
+        const { name, level, health, attack, defense } = chosenCharacter;
+        const character = new Player(level, health, attack, defense, chosenCharacter.link, name);
+        const enemy = new Player(enemyLevel, enemyHP, enemyAttack, enemyDefense, enemyLink, enemyName);
+        handleBattle(character, enemy);
     }
 
     const handleFinalBattle = (e) => {
-        if (characterSelected) {
-            const { enemyName, enemyLink, enemyLevel, enemyHP, enemyAttack, enemyDefense } = finalBoss;
-            const { name, level, health, attack, defense } = chosenCharacter;
-            const character = new Player(level, health, attack, defense, chosenCharacter.link, name);
-            const enemy = new Player(enemyLevel, enemyHP, enemyAttack, enemyDefense, enemyLink, enemyName);
-            handleBattle(character, enemy);
-        }
+        const { enemyName, enemyLink, enemyLevel, enemyHP, enemyAttack, enemyDefense } = finalBoss;
+        const { name, level, health, attack, defense } = chosenCharacter;
+        const character = new Player(level, health, attack, defense, chosenCharacter.link, name);
+        const enemy = new Player(enemyLevel, enemyHP, enemyAttack, enemyDefense, enemyLink, enemyName);
+        handleBattle(character, enemy);
     }
 
     return (
@@ -169,34 +165,35 @@ export default function BountyBoard({ handleBattle }) {
                             style={{ backgroundImage: "url(https://i.imgur.com/faKcT9i.png)" }}>
                             <p className='text-xl text-black text-center pt-12'>Level: {enemy.enemyLevel}</p>
                             <p className='text-3xl text-black  text-center '>{enemy.enemyName}</p>
-                            <Link
-                                to='/battle'
-                                className='text-3xl text-black hover:text-white mx-auto'
-                                title={enemy.enemyLevel}
-                                onClick={handleStartBattle}>
-                                Accept
-                            </Link>
+                            {characterSelected && (
+                                <Link
+                                    to='/battle'
+                                    className='text-3xl text-red-500 hover:text-white mx-auto'
+                                    title={enemy.enemyLevel}
+                                    onClick={handleStartBattle}>
+                                    Accept
+                                </Link>
+                            )}
                             <img className="w-1/3 mx-auto pb-12" src={enemy.enemyLink} alt={enemy.enemyName + "'s portrait"}></img>
-
                         </div>
                     ))}
             </div>
             <hr className='mt-20'></hr>
             <p className='text-4xl mb-12 text-teal-400 text-center mt-8'> Or, if you have the guts, <br></br>VANQUISH THE DARK LORD</p>
-            <Link
-                to='/battle'>
-                <div key={9} className='bg-local bg-origin-border bg-contain bg-no-repeat bg-center mt-12  flex flex-col' style={{ backgroundImage: "url(https://i.imgur.com/faKcT9i.png)" }}>
-                    <p className='text-xl text-black text-center pt-12'>Level: 99</p>
-                    <p className='text-3xl text-black  text-center '>Ben, the Dark Lord</p>
-                    <button
-                        className='text-3xl text-black hover:text-white mx-auto'
+            <div key={9} className='bg-local bg-origin-border bg-contain bg-no-repeat bg-center mt-12  flex flex-col' style={{ backgroundImage: "url(https://i.imgur.com/faKcT9i.png)" }}>
+                <p className='text-xl text-black text-center pt-12'>Level: 99</p>
+                <p className='text-3xl text-black  text-center '>Ben, the Dark Lord</p>
+                {characterSelected && (
+                    <Link
+                        to='/battle'
+                        className='text-3xl text-red-500 hover:text-white mx-auto'
                         style={{ cursor: 'pointer' }}
                         onClick={handleFinalBattle}>
                         Accept
-                    </button>
-                    <img className="w-1/3 mx-auto pb-12" src={"https://i.imgur.com/cIOapB8.png"} alt={"Ben's portrait"}></img>
-                </div>
-            </Link>
+                    </Link>
+                )}
+                <img className="w-1/3 mx-auto pb-12" src={"https://i.imgur.com/cIOapB8.png"} alt={"Ben's portrait"}></img>
+            </div>
         </div>
     );
 }

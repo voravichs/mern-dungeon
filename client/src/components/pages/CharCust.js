@@ -281,6 +281,14 @@ const CharCust = () => {
   const [currentSprite, setCurrentSprite] = useState(0);
   const [chosenSprite, setChosenSprite] = useState(charSprites[0]);
   const [saved, setSaved] = useState(false);
+  const [preset, setPreset] = useState({
+    name: "Weak",
+    level: 1,
+    health: 10,
+    attack: 4,
+    defense: 1
+  });
+
   const [saveChar] = useMutation(SAVE_CHARACTER);
 
   const handleChange = (event) => {
@@ -301,10 +309,10 @@ const CharCust = () => {
           "newCharacter": {
             "name": formState.name,
             "link": chosenSprite.link,
-            "level": 7,
-            "health": 70,
-            "attack": 12,
-            "defense": 19
+            "level": preset.level,
+            "health": preset.health,
+            "attack": preset.attack,
+            "defense": preset.defense
           }
         }
       });
@@ -365,11 +373,63 @@ const CharCust = () => {
     }
   }
 
+  const handlePreset = (e) => {
+    switch (e.target.value) {
+      case "weak":
+        setPreset({
+          name:"Weak",
+          level: 1,
+          health: 10,
+          attack: 4,
+          defense: 1
+        })
+        break;
+      case "strong":
+        setPreset({
+          name: "Strong",
+          level: 10,
+          health: 40,
+          attack: 20,
+          defense: 3
+        })
+        break;
+      case "robust":
+        setPreset({
+          name: "Robust",
+          level: 10,
+          health: 120,
+          attack: 7,
+          defense: 5
+        })
+        break;
+      case "sturdy":
+        setPreset({
+          name: "Sturdy",
+          level: 10,
+          health: 60,
+          attack: 6,
+          defense: 15
+        })
+        break;
+      case "hacker":
+        setPreset({
+          name: "Hacker",
+          level: 999,
+          health: 1000,
+          attack: 200,
+          defense: 90
+        })
+        break;
+      default:
+        break;
+    }
+  }
+
   return (
     <div className="rounded-lg border-4 bg-gradient-to-b from-gray-200 to-gray-500 p-2">
       <div className='bg-gradient-to-b from-blue-600 to-indigo-900 p-8'>
         <h1 className='text-4xl md:text-5xl mb-12 text-teal-400 text-center py-3'>Character Creation</h1>
-        <div className='md:grid grid-cols-2'>
+        <div className='grid lg:grid-cols-2'>
           <div>
             <p className='text-4xl text-teal-200 text-center'> Select A Portrait</p>
             <img className="w-2/3 mx-auto" src={chosenSprite.link} alt={chosenSprite.name}></img>
@@ -387,7 +447,7 @@ const CharCust = () => {
             </div>
             <p className='text-3xl mb-4 text-teal-200 text-center'>Portrait Style</p>
             <div className="w-1/2 lg:max-w-sm mx-auto pb-3">
-              <select className="w-full p-2.5 text-teal-200 bg-gray-700 border border-teal-200 rounded-md shadow-sm ring-teal-500 appearance-none focus:border-teal-600"
+              <select className="w-full p-2.5 text-teal-200 bg-gray-700 hover:bg-gray-600 border border-teal-200 rounded-md shadow-sm ring-teal-500 appearance-none focus:border-teal-600"
                 onChange={handleSelect}>
                 <option value="warrior">Warrior</option>
                 <option value="rogue">Rogue</option>
@@ -406,21 +466,36 @@ const CharCust = () => {
                 value={formState.name}
                 onChange={handleChange}
               />
+              <p className='text-3xl mb-4 text-teal-200 text-center'>Select a Preset</p>
+              <div className="w-1/2 lg:max-w-sm mx-auto pb-3">
+                <select className="mb-8 w-full p-2.5 text-teal-200 bg-gray-700 hover:bg-gray-600 border border-teal-200 rounded-md shadow-sm ring-teal-500 appearance-none focus:border-teal-600"
+                  onChange={handlePreset}>
+                  <option value="weak">Weak</option>
+                  <option value="strong">Strong</option>
+                  <option value="robust">Robust</option>
+                  <option value="strong">Sturdy</option>
+                  <option value="hacker">Hacker</option>
+                </select>
+              </div>
+              <p className='text-2xl mb-4 text-white text-center'> Level: {preset.level}</p>
+              <p className='text-2xl mb-4 text-white text-center'> HP: {preset.health}</p>
+              <p className='text-2xl mb-4 text-white text-center'> Attack: {preset.attack}</p>
+              <p className='text-2xl mb-4 text-white text-center'> Defense: {preset.defense}</p>
               <button
-                className='text-center block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'
+                className='mt-8 text-center block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3 '
                 type="submit">
                 Create
-              </button>  
+              </button>
             </div>
             {saved && (
-              <p className="text-xl mt-4 text-slate-50 text-center">
-                Character Saved! 
-                <br></br>It may take a few seconds to register them. 
+              <p className="text-xl mt-4 text-white text-center">
+                Character Saved!
+                <br></br>It may take a few seconds to register them.
                 You may now return to the main menu.
-              </p>  
+              </p>
             )}
             <Link
-              className='mt-12 md:absolute md:bottom-0 md:right-0 block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'
+              className='mt-24 block w-1/2 text-teal-200 text-2xl hover:bg-gray-700 hover:text-teal-200 transition-all ring-2 rounded-lg ring-teal-500 p-4 mx-auto py-3'
               to="/">
               Return to Main Menu
             </Link>
